@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Dashboard.css";
 import companyLogo from "./../assets/logo.png";
 import { createClient } from "@supabase/supabase-js";
+import { useNavigate } from "react-router-dom";
 
 const supabase = createClient(
   "https://dzkrxhjgneqqvylereku.supabase.co",
@@ -13,6 +14,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,6 +30,7 @@ export default function Login() {
       if (error) throw error;
 
       console.log("Logged in:", data);
+      navigate("/dashboard");
     } catch (err) {
       setError(err.message);
     } finally {
