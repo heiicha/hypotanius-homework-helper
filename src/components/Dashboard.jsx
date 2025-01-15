@@ -1,7 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Dashboard.css";
 import companyLogo from "./../assets/logo.png";
 import profile from "./../assets/pfp.jpeg";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  "https://dzkrxhjgneqqvylereku.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR6a3J4aGpnbmVxcXZ5bGVyZWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY2OTIzNDcsImV4cCI6MjA1MjI2ODM0N30.94q-TVZxU6jDPRDQStAMQhBrbCRrlOprEw-k3MI51_I"
+);
 
 function FundTable() {
   const funds = [
@@ -94,6 +100,49 @@ function FundTable() {
 }
 
 function Dashboard() {
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    profileUrl: "",
+  });
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (user) {
+        // Get profile data from profiles table
+        const { data: profileData } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("id", user.id)
+          .single();
+
+        // Get profile picture URL if it exists
+        let profileUrl = profile; // Default to local image
+        if (profileData?.avatar_url) {
+          const { data: imageData } = await supabase.storage
+            .from("profiles")
+            .download(profileData.avatar_url);
+          if (imageData) {
+            profileUrl = URL.createObjectURL(imageData);
+          }
+        }
+
+        setUserData({
+          name:
+            profileData?.full_name || user.user_metadata?.full_name || "User",
+          email: user.email,
+          profileUrl,
+        });
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
     <>
       <div className="view-head">
@@ -129,7 +178,7 @@ function Dashboard() {
                 animation: "fadeIn 0.5s ease-in",
               }}
             >
-              John Doe
+              {userData.name}
             </span>
             <span
               style={{
@@ -139,11 +188,11 @@ function Dashboard() {
                 animation: "fadeIn 0.5s ease-in",
               }}
             >
-              john.doe@example.com
+              {userData.email}
             </span>
           </div>
           <img
-            src={profile}
+            src={userData.profileUrl}
             alt="Profile"
             style={{
               width: "32px",
@@ -162,7 +211,7 @@ function Dashboard() {
             animation: "slideInFromLeft 0.5s ease-out",
           }}
         >
-          Welcome back, John Doe
+          Welcome back, {userData.name}
         </p>
         <p
           className="sub-header"

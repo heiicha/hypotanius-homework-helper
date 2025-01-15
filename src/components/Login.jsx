@@ -38,6 +38,21 @@ export default function Login() {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: window.location.origin + "/dashboard",
+        },
+      });
+
+      if (error) throw error;
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <div
       style={{
@@ -186,6 +201,7 @@ export default function Login() {
               cursor: loading ? "not-allowed" : "pointer",
               transition: "all 0.4s ease",
               boxShadow: "0 6px 12px rgba(0, 0, 0, 0.15)",
+              marginBottom: "16px",
               "&:hover": {
                 transform: loading ? "none" : "translateY(-3px)",
                 boxShadow: loading ? "none" : "0 8px 16px rgba(0, 0, 0, 0.2)",
@@ -202,6 +218,39 @@ export default function Login() {
             {loading ? "Signing In..." : "Sign In"}
           </button>
         </form>
+
+        <div style={{ textAlign: "center", margin: "20px 0" }}>
+          <div style={{ color: "#64748b", margin: "10px 0" }}>-or-</div>
+          <button
+            onClick={handleGoogleSignIn}
+            style={{
+              width: "100%",
+              padding: "16px",
+              background: "white",
+              color: "#333",
+              border: "2px solid #eef2f7",
+              borderRadius: "16px",
+              fontSize: "17px",
+              fontWeight: "600",
+              cursor: "pointer",
+              transition: "all 0.4s ease",
+              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px",
+            }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27c3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10c5.35 0 9.25-3.67 9.25-9.09c0-1.15-.15-1.81-.15-1.81Z"
+              />
+            </svg>
+            Sign in with Google
+          </button>
+        </div>
+
         <p
           style={{
             textAlign: "center",
@@ -214,7 +263,7 @@ export default function Login() {
         >
           Don't have an account?{" "}
           <a
-            href="#"
+            href="/"
             style={{
               color: "#000",
               textDecoration: "none",
