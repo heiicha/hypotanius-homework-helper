@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./Dashboard.css";
 import companyLogo from "./../assets/logo.png";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "firebase/auth";
+import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
+
+const supabase = createClient(
+  "https://dzkrxhjgneqqvylereku.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR6a3J4aGpnbmVxcXZ5bGVyZWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY2OTIzNDcsImV4cCI6MjA1MjI2ODM0N30.94q-TVZxU6jDPRDQStAMQhBrbCRrlOprEw-k3MI51_I"
+);
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -22,13 +22,14 @@ export default function Login() {
     setError(null);
 
     try {
-      const auth = getAuth();
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
-        password
-      );
-      console.log("Logged in:", userCredential.user);
+        password,
+      });
+
+      if (error) throw error;
+
+      console.log("Logged in:", data);
       navigate("/dashboard");
     } catch (err) {
       setError(err.message);
@@ -38,39 +39,17 @@ export default function Login() {
   };
 
   const handleGoogleSignIn = async () => {
-    setLoading(true);
-    setError(null);
-
     try {
-      const auth = getAuth();
-      const provider = new GoogleAuthProvider();
-      provider.setCustomParameters({
-        prompt: "select_account",
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: window.location.origin + "/dashboard",
+        },
       });
 
-      const result = await signInWithPopup(auth, provider);
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      const user = result.user;
-
-      console.log("Google sign in successful:", user);
-      navigate("/dashboard");
+      if (error) throw error;
     } catch (err) {
-      const errorCode = err.code;
-      const errorMessage = err.message;
-      const email = err.customData?.email;
-      const credential = GoogleAuthProvider.credentialFromError(err);
-
-      console.error("Google sign in error:", {
-        errorCode,
-        errorMessage,
-        email,
-        credential,
-      });
-
       setError(err.message);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -244,7 +223,6 @@ export default function Login() {
           <div style={{ color: "#64748b", margin: "10px 0" }}>-or-</div>
           <button
             onClick={handleGoogleSignIn}
-            disabled={loading}
             style={{
               width: "100%",
               padding: "16px",
@@ -254,14 +232,13 @@ export default function Login() {
               borderRadius: "16px",
               fontSize: "17px",
               fontWeight: "600",
-              cursor: loading ? "not-allowed" : "pointer",
+              cursor: "pointer",
               transition: "all 0.4s ease",
               boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               gap: "10px",
-              opacity: loading ? 0.7 : 1,
             }}
           >
             <svg width="20" height="20" viewBox="0 0 24 24">
@@ -270,7 +247,7 @@ export default function Login() {
                 d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27c3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10c5.35 0 9.25-3.67 9.25-9.09c0-1.15-.15-1.81-.15-1.81Z"
               />
             </svg>
-            {loading ? "Signing in..." : "Sign in with Google"}
+            Sign in with Google
           </button>
         </div>
 

@@ -191,17 +191,23 @@ function Dashboard() {
               {userData.email}
             </span>
           </div>
-          <img
-            src={userData.profileUrl}
-            alt="Profile"
+          <div
             style={{
               width: "32px",
               height: "32px",
               borderRadius: "50%",
-              objectFit: "cover",
+              backgroundColor: "#000000",
+              color: "white",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "16px",
+              fontWeight: "bold",
               animation: "fadeIn 0.5s ease-in",
             }}
-          />
+          >
+            {userData.email ? userData.email[0].toUpperCase() : "?"}
+          </div>
         </div>
       </div>
       <div>
