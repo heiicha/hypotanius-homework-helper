@@ -1,0 +1,90 @@
+/* Ensure the CSS is linked correctly in your React project */
+
+#root {
+    max-width: 1280px;
+    padding: 2rem;
+    text-align: left;
+  }
+  
+  .input-container {
+    display: flex;          /* Ensures that the input groups are displayed side by side */
+    justify-content: center; /* Centers the input fields horizontally */
+    gap: 120px;              /* Adds space between the input fields */
+    padding: 20px
+  }
+  
+  .header {
+    color: #000000;
+    font-weight: 600;
+    font-size: x-large;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;  /* Stacks the label and input vertically */
+    width: 200px;
+    display: "inline-block";
+    border-radius: 50%;
+    background-color: "#77B254";
+    animation: "pulse 2s infinite";
+  }
+  
+  .radio-group {
+    display: flex;
+    flex-direction: column;  /* Stacks the label and input vertically */
+    width: 20px;
+    display: "inline-block";
+    border-radius: 50%;
+    background-color: "#77B254";
+    animation: "pulse 2s infinite";
+  }
+  
+  .form-group {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .large-input-group {
+    display: flex;
+    flex-direction: column;  /* Stacks the label and input vertically */
+    width: 500px;
+    height: 150px;
+    display: "inline-block";
+    border-radius: 50%;
+    background-color: "#77B254";
+    animation: "pulse 2s infinite";
+  }
+  
+  .large-input-group input {
+    height: 300px;
+  }
+  
+  label {
+    margin-bottom: 5px;      /* Adds space between the label and input field */
+  }
+  
+  input {
+    padding: 8px;
+    width: 100%;             /* Ensures input fields fill their parent container */
+    border: 1px solid #ccc;
+    font-size: 14px;
+    border: 1px solid #a1a1a1;
+  }
+  
+  .prefix {
+    position: absolute;
+    left: 190px;
+  }
+  
+  
+  input, select {
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  
+  button:hover {
+    background-color: #ffffff;
+  }  
