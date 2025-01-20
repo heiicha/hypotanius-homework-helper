@@ -41,6 +41,7 @@ export default function Signup() {
       });
 
       if (authError) throw authError;
+      navigate("/verification");
 
       // Upload profile picture if provided
       let profileUrl = null;
