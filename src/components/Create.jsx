@@ -25,6 +25,18 @@ export default function CreateFundForm() {
     setActiveStep(index);
   };
 
+  const handleBack = () => {
+    if (activeStep > 0) {
+      setActiveStep(activeStep - 1);
+    }
+  };
+
+  const handleContinue = () => {
+    if (activeStep < 3) {
+      setActiveStep(activeStep + 1);
+    }
+  };
+
   const renderStepComponent = () => {
     switch (activeStep) {
       case 0:
@@ -92,6 +104,7 @@ export default function CreateFundForm() {
               border: "1.5px solid #E3E3E3",
               cursor: "pointer",
             }}
+            onClick={handleBack}
           >
             Back
           </button>
@@ -105,6 +118,7 @@ export default function CreateFundForm() {
               color: "white",
               cursor: "pointer",
             }}
+            onClick={handleContinue}
           >
             Continue
           </button>
@@ -158,7 +172,7 @@ export default function CreateFundForm() {
           </ol>
         </div>
         <div style={{ flex: 3, marginLeft: 30 }}>
-          {renderStepComponent()} {/* renders active component */}
+          {renderStepComponent()} {/* Render active component */}
         </div>
       </div>
     </div>
