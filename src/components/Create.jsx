@@ -34,6 +34,14 @@ export default function CreateFundForm() {
   const handleContinue = () => {
     if (activeStep < 3) {
       setActiveStep(activeStep + 1);
+    } else {
+      const confirmSubmission = window.confirm(
+        "Are you sure you want to submit this form?"
+      );
+
+      if (confirmSubmission) {
+        navigate("/form-success");
+      }
     }
   };
 
@@ -148,7 +156,7 @@ export default function CreateFundForm() {
                     width: "35px",
                     height: "35px",
                     borderRadius: "50%",
-                    backgroundColor: index === activeStep ? "#000" : "#E3E3E3", // Change color based on active step
+                    backgroundColor: index === activeStep ? "#000" : "#E3E3E3",
                     color: index === activeStep ? "#FFF" : "#000",
                     display: "flex",
                     justifyContent: "center",
@@ -171,9 +179,7 @@ export default function CreateFundForm() {
             ))}
           </ol>
         </div>
-        <div style={{ flex: 3, marginLeft: 30 }}>
-          {renderStepComponent()} {/* Render active component */}
-        </div>
+        <div style={{ flex: 3, marginLeft: 30 }}>{renderStepComponent()}</div>
       </div>
     </div>
   );
