@@ -56,7 +56,7 @@ export default function Success() {
           <button
             style={{
               padding: "10px 20px",
-              border: "1px solid black",
+              border: "0.5px solid black",
               borderRadius: "4px",
               backgroundColor: "white",
               cursor: "pointer",
