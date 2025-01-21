@@ -7,13 +7,20 @@ export default function Identity() {
       <div style={{ display: "flex" }}>
         {/* Form Content */}
         <div style={{ flex: 3 }}>
-          <h2 style={{ marginBottom: "25px", color: "#000" }}>Step 1</h2>
-          <h3 style={{ marginBottom: "25px", color: "#000000" }}>
+          <br />
+          <text style={{ marginTop: "30px", color: "#505050" }}>
+            Step 1
+          </text>{" "}
+          <br />
+          <text
+            style={{ marginBottom: "25px", color: "#000000", fontSize: 25 }}
+          >
             Information Details
-          </h3>
+          </text>
+          <br />
           <form style={{ display: "grid", gap: "25px" }}>
             {/* Type Fund */}
-            <div>
+            <div style={{ marginTop: 20 }}>
               <label
                 style={{ display: "block", marginBottom: "8px", color: "#000" }}
               >

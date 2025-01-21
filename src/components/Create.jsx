@@ -83,6 +83,20 @@ export default function CreateFundForm() {
           </button>
           <button
             style={{
+              marginRight: "15px",
+              backgroundColor: "#FFFFFF",
+              color: "#000000",
+              padding: "12px 25px",
+              borderRadius: "5px",
+              fontWeight: "bold",
+              border: "1.5px solid #E3E3E3",
+              cursor: "pointer",
+            }}
+          >
+            Back
+          </button>
+          <button
+            style={{
               backgroundColor: "#000000",
               padding: "12px 25px",
               border: "none",
@@ -97,7 +111,7 @@ export default function CreateFundForm() {
         </div>
       </header>
       <div style={{ display: "flex" }}>
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 0.5 }}>
           <ol style={{ listStyle: "none", padding: 0 }}>
             {[
               "Identity",
@@ -143,7 +157,7 @@ export default function CreateFundForm() {
             ))}
           </ol>
         </div>
-        <div style={{ flex: 3 }}>
+        <div style={{ flex: 3, marginLeft: 30 }}>
           {renderStepComponent()} {/* renders active component */}
         </div>
       </div>
