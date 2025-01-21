@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Verification from "./components/Verification";
+import Create from "./components/Create";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/verification" element={<Verification />} />
+        <Route path="/create" element={<Create />} />
       </Routes>
     </Router>
   );

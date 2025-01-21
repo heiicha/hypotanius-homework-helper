@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import companyLogo from "./../assets/logo.png";
 import profile from "./../assets/pfp.jpeg";
 import { createClient } from "@supabase/supabase-js";
+import { useNavigate } from "react-router-dom";
 
 const supabase = createClient(
   "https://dzkrxhjgneqqvylereku.supabase.co",
@@ -18,7 +19,7 @@ function FundTable() {
       AUM: "1M",
       status: "Active",
       investors: 200,
-      KYC: "Completed",
+      KYC: "Verified",
       risk: "High",
     },
     {
@@ -38,7 +39,7 @@ function FundTable() {
       AUM: "2M",
       status: "Active",
       investors: 300,
-      KYC: "Completed",
+      KYC: "Verified",
       risk: "Low",
     },
   ];
@@ -142,6 +143,10 @@ function Dashboard() {
 
     fetchUserData();
   }, []);
+  const navigate = useNavigate();
+  const handleNew = () => {
+    navigate("/create");
+  };
 
   return (
     <>
@@ -258,6 +263,7 @@ function Dashboard() {
               Manage Fund
             </button>
             <button
+              onClick={handleNew}
               style={{
                 padding: "10px 20px",
                 backgroundColor: "#000000",

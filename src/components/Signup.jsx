@@ -13,7 +13,6 @@ export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [profilePicture, setProfilePicture] = useState(null);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -45,21 +44,6 @@ export default function Signup() {
 
       // Upload profile picture if provided
       let profileUrl = null;
-      if (profilePicture) {
-        const fileExt = profilePicture.name.split(".").pop();
-        const fileName = `${authData.user.id}.${fileExt}`;
-
-        const { error: uploadError } = await supabase.storage
-          .from("profiles")
-          .upload(fileName, profilePicture);
-
-        if (uploadError) throw uploadError;
-
-        profileUrl = `${
-          supabase.storage.from("profiles").getPublicUrl(fileName).data
-            .publicUrl
-        }`;
-      }
 
       const { error: profileError } = await supabase.from("profiles").insert([
         {
