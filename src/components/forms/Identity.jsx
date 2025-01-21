@@ -4,53 +4,7 @@ export default function Identity() {
   return (
     <div>
       {/* Form Section */}
-      <div style={{ display: "flex", gap: "50px" }}>
-        {/* Left Sidebar */}
-        <div style={{ flex: 1 }}>
-          <ol style={{ listStyle: "none", padding: 0 }}>
-            {[
-              "Identity",
-              "Management Fee",
-              "Waterfall",
-              "Other Information",
-            ].map((step, index) => (
-              <li
-                key={index}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginBottom: "25px",
-                }}
-              >
-                <div
-                  style={{
-                    width: "35px",
-                    height: "35px",
-                    borderRadius: "50%",
-                    backgroundColor: index === 0 ? "#000" : "#E3E3E3",
-                    color: index === 0 ? "#FFF" : "#000",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontWeight: "bold",
-                    marginRight: "15px",
-                  }}
-                >
-                  {index + 1}
-                </div>
-                <div>
-                  <div style={{ fontWeight: "bold", color: "#000" }}>
-                    {step}
-                  </div>
-                  <div style={{ fontSize: "14px", color: "#555" }}>
-                    Lorem ipsum dolor sit amet
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-
+      <div style={{ display: "flex" }}>
         {/* Form Content */}
         <div style={{ flex: 3 }}>
           <h2 style={{ marginBottom: "25px", color: "#000" }}>Step 1</h2>
@@ -96,7 +50,7 @@ export default function Identity() {
                   border: "1px solid #ccc",
                   borderRadius: "5px",
                   backgroundColor: "#fff",
-                  width: "10%",
+                  width: "15%",
                   color: "black",
                 }}
               >
@@ -291,10 +245,103 @@ export default function Identity() {
               >
                 Startup
               </div>
+              <div style={{ display: "flex", gap: "30px" }}>
+                <div style={{ flex: 1 }}>
+                  <label
+                    style={{
+                      display: "block",
+                      marginBottom: "8px",
+                      color: "#000",
+                    }}
+                  >
+                    Geography Focus
+                  </label>
+                  <select
+                    style={{
+                      width: "84%",
+                      padding: "12px",
+                      border: "1px solid #ccc",
+                      borderRadius: "5px",
+                      backgroundColor: "#fff",
+                      color: "#000",
+                    }}
+                  >
+                    <option>Select geography focus</option>
+                  </select>
+                </div>
+                <div style={{ flex: 1 }}>
+                  <label
+                    style={{
+                      display: "block",
+                      marginBottom: "8px",
+                      color: "#000",
+                    }}
+                  >
+                    Sector Focus
+                  </label>
+                  <select
+                    style={{
+                      width: "84%",
+                      padding: "12px",
+                      border: "1px solid #ccc",
+                      borderRadius: "5px",
+                      backgroundColor: "#fff",
+                      color: "#000",
+                    }}
+                  >
+                    <option>Select sector focus</option>
+                  </select>
+                </div>
+              </div>
+              <div style={{ flex: 1, marginTop: "20px" }}>
+                <label
+                  style={{
+                    display: "block",
+                    marginBottom: "8px",
+                    color: "#000",
+                  }}
+                >
+                  Number
+                </label>
+                <input
+                  type="text"
+                  placeholder="Input code unique number"
+                  style={{
+                    width: "80%",
+                    padding: "12px",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    backgroundColor: "#fff",
+                    color: "#000",
+                  }}
+                />
+              </div>
             </div>
           </form>
         </div>
       </div>
+
+      {/* Media Queries */}
+      <style>
+        {`
+          @media (max-width: 768px) {
+            div {
+              display: block;
+              width: 100%;
+            }
+            form {
+              grid-template-columns: 1fr;
+            }
+            .form-group {
+              display: block;
+              width: 100%;
+            }
+            select, input[type="text"] {
+              width: 100%;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }

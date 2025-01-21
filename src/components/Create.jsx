@@ -1,13 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Identity from "./forms/Identity";
+import ManagementFee from "./forms/ManagementFee";
+import Waterfall from "./forms/Waterfall";
+import OtherInformation from "./forms/OtherInformation";
 
 export default function CreateFundForm() {
   const navigate = useNavigate();
+  const [isMobile, setIsMobile] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const handleStepClick = (index) => {
+    setActiveStep(index);
+  };
+
+  const renderStepComponent = () => {
+    switch (activeStep) {
+      case 0:
+        return <Identity />;
+      case 1:
+        return <ManagementFee />;
+      case 2:
+        return <Waterfall />;
+      case 3:
+        return <OtherInformation />;
+      default:
+        return <Identity />;
+    }
+  };
+
   return (
     <div
       style={{
-        padding: "30px",
         fontFamily: "Arial, sans-serif",
       }}
     >
@@ -16,7 +51,6 @@ export default function CreateFundForm() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          marginBottom: "30px",
           borderBottom: "1px solid #ccc",
           paddingBottom: "15px",
         }}
@@ -28,7 +62,7 @@ export default function CreateFundForm() {
             cursor: "pointer",
             color: "#000",
           }}
-          onClick={navigate("/dashboard")}
+          onClick={() => navigate("/dashboard")}
         >
           &larr; Create New Fund
         </div>
@@ -62,7 +96,57 @@ export default function CreateFundForm() {
           </button>
         </div>
       </header>
-      <Identity />
+      <div style={{ display: "flex" }}>
+        <div style={{ flex: 1 }}>
+          <ol style={{ listStyle: "none", padding: 0 }}>
+            {[
+              "Identity",
+              "Management Fee",
+              "Waterfall",
+              "Other Information",
+            ].map((step, index) => (
+              <li
+                key={index}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginBottom: "25px",
+                  cursor: "pointer",
+                }}
+                onClick={() => handleStepClick(index)}
+              >
+                <div
+                  style={{
+                    width: "35px",
+                    height: "35px",
+                    borderRadius: "50%",
+                    backgroundColor: index === activeStep ? "#000" : "#E3E3E3", // Change color based on active step
+                    color: index === activeStep ? "#FFF" : "#000",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontWeight: "bold",
+                    marginRight: "15px",
+                  }}
+                >
+                  {index + 1}
+                </div>
+                <div>
+                  <div style={{ fontWeight: "bold", color: "#000" }}>
+                    {step}
+                  </div>
+                  <div style={{ fontSize: "14px", color: "#555" }}>
+                    Lorem ipsum dolor sit amet
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div style={{ flex: 3 }}>
+          {renderStepComponent()} {/* renders active component */}
+        </div>
+      </div>
     </div>
   );
 }
