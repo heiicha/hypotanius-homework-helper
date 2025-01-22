@@ -161,38 +161,39 @@ function FundTable() {
 
 function Modal({ isOpen, funds, onClose, onSelect }) {
   if (!isOpen) return null;
+
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 5;
+
   const handleFundSelect = (fund) => {
     navigate("/manage", { state: { fund } });
     onSelect(fund);
   };
 
+  const handleNextPage = () => {
+    if ((currentPage + 1) * itemsPerPage < funds.length) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentFunds = funds.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(funds.length / itemsPerPage);
+
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 1000,
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: "white",
-          padding: "20px",
-          borderRadius: "10px",
-          minWidth: "300px",
-        }}
-      >
+    <div className="modal-overlay">
+      <div className="modal-content">
         <h3 style={{ color: "black" }}>Select a Fund</h3>
         <ul style={{ listStyleType: "none", padding: 0 }}>
-          {funds.map((fund) => (
+          {currentFunds.map((fund) => (
             <li
               key={fund.id}
               style={{
@@ -216,30 +217,118 @@ function Modal({ isOpen, funds, onClose, onSelect }) {
         </ul>
         <div
           style={{
-            alignItems: "center",
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "10px",
+          }}
+        >
+          <button
+            onClick={handlePrevPage}
+            disabled={currentPage === 0}
+            style={{
+              padding: "10px",
+              backgroundColor: "#fff",
+              color: "#000",
+              border: "2px solid #E0E0E0",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontWeight: "bold",
+              marginRight: "10px",
+              flex: 1,
+            }}
+          >
+            {"<"}
+          </button>
+          <span style={{ alignSelf: "center", color: "black" }}>
+            Page {currentPage + 1} of {totalPages}
+          </span>
+          <button
+            onClick={handleNextPage}
+            disabled={endIndex >= funds.length}
+            style={{
+              padding: "10px",
+              backgroundColor: "#fff",
+              color: "#000",
+              border: "2px solid #E0E0E0",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontWeight: "bold",
+              marginLeft: "10px",
+              flex: 1,
+            }}
+          >
+            {">"}
+          </button>
+        </div>
+        <div
+          style={{
             display: "flex",
             justifyContent: "center",
+            marginTop: "10px",
           }}
         >
           <button
             onClick={onClose}
             style={{
-              marginTop: "10px",
               padding: "15px",
               width: "100%",
-              backgroundColor: "#000000",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
+              backgroundColor: "#fff",
+              color: "#000",
+              border: "2px solid #E0E0E0",
+              borderRadius: "8px",
               cursor: "pointer",
               fontWeight: "bold",
-              alignSelf: "center",
             }}
           >
             Close
           </button>
         </div>
       </div>
+      <style>
+        {`
+          .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.5s ease-in-out;
+          }
+
+          .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 300px;
+            animation: shrinkIn 0.1s ease-in-out;
+          }
+
+          @keyframes shrinkIn {
+            from {
+              transform: scale(0.5);
+              opacity: 0;
+            }
+            to {
+              transform: scale(1);
+              opacity: 1;
+            }
+          }
+
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }
@@ -475,7 +564,7 @@ function Dashboard() {
               display: block;
               overflow-x: auto;
               white-space: nowrap;
-            }
+              }
 
             .view-head {
               flex-direction: column;
