@@ -218,8 +218,28 @@ export default function Login() {
             {loading ? "Signing In..." : "Sign In"}
           </button>
         </form>
-
-        <div style={{ textAlign: "center", margin: "20px 0" }}>
+        <div style={{ textAlign: "center" }}>
+          <p
+            onClick={() => navigate("/forgot")}
+            style={{
+              color: "#000",
+              cursor: "pointer",
+              textDecoration: "underline",
+              fontWeight: "600",
+              transition: "all 0.3s ease",
+              borderBottom: "2px solid transparent",
+              padding: "2px 4px",
+              "&:hover": {
+                background: "linear-gradient(120deg, #f0f0f0 0%, #f0f0f0 100%)",
+                backgroundSize: "100% 0.2em",
+                backgroundPosition: "0 88%",
+                backgroundRepeat: "no-repeat",
+                borderRadius: "4px",
+              },
+            }}
+          >
+            Forgot password?
+          </p>
           <div style={{ color: "#64748b", margin: "10px 0" }}>-or-</div>
           <button
             onClick={handleGoogleSignIn}

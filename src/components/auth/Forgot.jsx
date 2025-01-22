@@ -30,10 +30,12 @@ function ForgotPassword() {
     <>
       <img
         src={logo}
+        onClick={() => navigate("/dashboard")}
         className="logo"
         alt="Company Logo"
         style={{
           animation: "slideIn 0.5s ease-out",
+          cursor: "pointer",
         }}
       />
       <div

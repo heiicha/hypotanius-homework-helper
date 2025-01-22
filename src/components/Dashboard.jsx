@@ -144,6 +144,9 @@ function Modal({ isOpen, funds, onClose, onSelect }) {
                 backgroundColor: "#f9f9f9",
                 transition: "background-color 0.3s",
                 color: "black",
+                textAlign: "center",
+                fontWeight: "bold",
+                fontSize: "24px",
               }}
               onClick={() => handleFundSelect(fund)}
             >
@@ -151,20 +154,31 @@ function Modal({ isOpen, funds, onClose, onSelect }) {
             </li>
           ))}
         </ul>
-        <button
-          onClick={onClose}
+        <div
           style={{
-            marginTop: "10px",
-            padding: "10px 20px",
-            backgroundColor: "#333",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "center",
           }}
         >
-          Close
-        </button>
+          <button
+            onClick={onClose}
+            style={{
+              marginTop: "10px",
+              padding: "15px",
+              width: "100%",
+              backgroundColor: "#000000",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontWeight: "bold",
+              alignSelf: "center",
+            }}
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );
