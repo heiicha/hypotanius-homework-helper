@@ -7,6 +7,7 @@ import Signup from "./components/Signup";
 import Verification from "./components/Verification";
 import Create from "./components/Create";
 import Success from "./components/forms/Success";
+import Manage from "./components/Manage";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/verification" element={<Verification />} />
         <Route path="/create" element={<Create />} />
         <Route path="/form-success" element={<Success />} />
+        <Route path="/manage" element={<Manage />} />
       </Routes>
     </Router>
   );

@@ -9,41 +9,40 @@ const supabase = createClient(
   "https://dzkrxhjgneqqvylereku.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR6a3J4aGpnbmVxcXZ5bGVyZWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY2OTIzNDcsImV4cCI6MjA1MjI2ODM0N30.94q-TVZxU6jDPRDQStAMQhBrbCRrlOprEw-k3MI51_I"
 );
+const funds = [
+  {
+    id: 1,
+    name: "Growth Fund",
+    manager: "Alice Johnson",
+    AUM: "1M",
+    status: "Active",
+    investors: 200,
+    KYC: "Verified",
+    risk: "High",
+  },
+  {
+    id: 2,
+    name: "Income Fund",
+    manager: "Bob Smith",
+    AUM: "500K",
+    status: "Inactive",
+    investors: 50,
+    KYC: "Pending",
+    risk: "Medium",
+  },
+  {
+    id: 3,
+    name: "Equity Fund",
+    manager: "Charlie Brown",
+    AUM: "2M",
+    status: "Active",
+    investors: 300,
+    KYC: "Verified",
+    risk: "Low",
+  },
+];
 
 function FundTable() {
-  const funds = [
-    {
-      id: 1,
-      name: "Growth Fund",
-      manager: "Alice Johnson",
-      AUM: "1M",
-      status: "Active",
-      investors: 200,
-      KYC: "Verified",
-      risk: "High",
-    },
-    {
-      id: 2,
-      name: "Income Fund",
-      manager: "Bob Smith",
-      AUM: "500K",
-      status: "Inactive",
-      investors: 50,
-      KYC: "Pending",
-      risk: "Medium",
-    },
-    {
-      id: 3,
-      name: "Equity Fund",
-      manager: "Charlie Brown",
-      AUM: "2M",
-      status: "Active",
-      investors: 300,
-      KYC: "Verified",
-      risk: "Low",
-    },
-  ];
-
   return (
     <table border="1">
       <thead>
@@ -100,6 +99,77 @@ function FundTable() {
   );
 }
 
+function Modal({ isOpen, funds, onClose, onSelect }) {
+  if (!isOpen) return null;
+  const navigate = useNavigate();
+  const handleFundSelect = (fund) => {
+    navigate("/manage", { state: { fund } });
+    onSelect(fund);
+  };
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 1000,
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "white",
+          padding: "20px",
+          borderRadius: "10px",
+          minWidth: "300px",
+        }}
+      >
+        <h3 style={{ color: "black" }}>Select a Fund</h3>
+        <ul style={{ listStyleType: "none", padding: 0 }}>
+          {funds.map((fund) => (
+            <li
+              key={fund.id}
+              style={{
+                margin: "10px 0",
+                cursor: "pointer",
+                padding: "10px",
+                border: "1px solid #ddd",
+                borderRadius: "5px",
+                backgroundColor: "#f9f9f9",
+                transition: "background-color 0.3s",
+                color: "black",
+              }}
+              onClick={() => handleFundSelect(fund)}
+            >
+              {fund.name}
+            </li>
+          ))}
+        </ul>
+        <button
+          onClick={onClose}
+          style={{
+            marginTop: "10px",
+            padding: "10px 20px",
+            backgroundColor: "#333",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function Dashboard() {
   const [userData, setUserData] = useState({
     name: "",
@@ -114,15 +184,13 @@ function Dashboard() {
       } = await supabase.auth.getUser();
 
       if (user) {
-        // Get profile data from profiles table
         const { data: profileData } = await supabase
           .from("profiles")
           .select("*")
           .eq("id", user.id)
           .single();
 
-        // Get profile picture URL if it exists
-        let profileUrl = profile; // Default to local image
+        let profileUrl = profile;
         if (profileData?.avatar_url) {
           const { data: imageData } = await supabase.storage
             .from("profiles")
@@ -146,6 +214,22 @@ function Dashboard() {
   const navigate = useNavigate();
   const handleNew = () => {
     navigate("/create");
+  };
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedFund, setSelectedFund] = useState(null);
+
+  const handleManage = () => {
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
+
+  const handleFundSelect = (fund) => {
+    console.log("Selected Fund:", fund);
+    setSelectedFund(fund);
+    setModalOpen(false);
   };
 
   return (
@@ -230,7 +314,7 @@ function Dashboard() {
             animation: "slideInFromLeft 0.5s ease-out",
           }}
         >
-          Lorem ipsum dolor siamet
+          Keep your pennies, I’m chasing dollars.
         </p>
         <div
           style={{
@@ -244,6 +328,7 @@ function Dashboard() {
           <p className="title">Overview</p>
           <div>
             <button
+              onClick={handleManage}
               style={{
                 padding: "10px 20px",
                 backgroundColor: "#FFFFFF",
@@ -286,6 +371,12 @@ function Dashboard() {
           </div>
         </div>
         <FundTable />
+        <Modal
+          isOpen={isModalOpen}
+          funds={funds}
+          onClose={handleModalClose}
+          onSelect={handleFundSelect}
+        />
       </div>
       <style>
         {`
