@@ -259,7 +259,10 @@ function Dashboard() {
             justifyContent: "flex-end",
           }}
         >
-          <div style={{ marginRight: "10px" }}>
+          <div
+            style={{ marginRight: "10px", cursor: "pointer" }}
+            onClick={() => navigate("/forgot")}
+          >
             <span
               style={{
                 color: "black",

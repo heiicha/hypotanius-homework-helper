@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./Dashboard.css";
-import companyLogo from "./../assets/logo.png";
+import "../Dashboard.css";
+import companyLogo from "./../../assets/logo.png";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 
