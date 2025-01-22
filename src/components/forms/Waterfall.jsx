@@ -7,18 +7,10 @@ export default function Waterfall() {
       <div style={{ display: "flex" }}>
         {/* Form Content */}
         <div style={{ flex: 3 }}>
+          <text style={{ color: "#505050" }}>Step 3</text> <br />
+          <text style={{ color: "#000000", fontSize: 25 }}>Waterfall</text>
           <br />
-          <text style={{ marginTop: "30px", color: "#505050" }}>
-            Step 3
-          </text>{" "}
-          <br />
-          <text
-            style={{ marginBottom: "25px", color: "#000000", fontSize: 25 }}
-          >
-            Waterfall
-          </text>
-          <br />
-          <form style={{ display: "grid", gap: "25px" }}>
+          <form style={{ display: "grid" }}>
             {/* Type Fund */}
             <div style={{ marginTop: 20 }}></div>
 

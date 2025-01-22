@@ -7,11 +7,7 @@ export default function ManagementFee() {
       <div style={{ display: "flex" }}>
         {/* Form Content */}
         <div style={{ flex: 3 }}>
-          <br />
-          <text style={{ marginTop: "30px", color: "#505050" }}>
-            Step 2
-          </text>{" "}
-          <br />
+          <text style={{ color: "#505050" }}>Step 2</text> <br />
           <text
             style={{ marginBottom: "25px", color: "#000000", fontSize: 25 }}
           >

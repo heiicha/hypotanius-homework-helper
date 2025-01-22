@@ -98,20 +98,6 @@ export default function CreateFundForm() {
               border: "1.5px solid #E3E3E3",
               cursor: "pointer",
             }}
-          >
-            Save as Draft
-          </button>
-          <button
-            style={{
-              marginRight: "15px",
-              backgroundColor: "#FFFFFF",
-              color: "#000000",
-              padding: "12px 25px",
-              borderRadius: "5px",
-              fontWeight: "bold",
-              border: "1.5px solid #E3E3E3",
-              cursor: "pointer",
-            }}
             onClick={handleBack}
           >
             Back
@@ -132,55 +118,129 @@ export default function CreateFundForm() {
           </button>
         </div>
       </header>
-      <div style={{ display: "flex" }}>
-        <div style={{ flex: 0.5 }}>
-          <ol style={{ listStyle: "none", padding: 0 }}>
-            {[
-              "Identity",
-              "Management Fee",
-              "Waterfall",
-              "Other Information",
-            ].map((step, index) => (
-              <li
-                key={index}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginBottom: "25px",
-                  cursor: "pointer",
-                }}
-                onClick={() => handleStepClick(index)}
-              >
-                <div
-                  style={{
-                    width: "35px",
-                    height: "35px",
-                    borderRadius: "50%",
-                    backgroundColor: index === activeStep ? "#000" : "#E3E3E3",
-                    color: index === activeStep ? "#FFF" : "#000",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontWeight: "bold",
-                    marginRight: "15px",
-                  }}
+      <div className={isMobile ? "mobile-view" : "desktop-view"}>
+        <div className="steps-container">
+          <ol className="steps-list">
+            {["Identity", "Management", "Waterfall", "Others"].map(
+              (step, index) => (
+                <li
+                  key={index}
+                  className="step-item"
+                  onClick={() => handleStepClick(index)}
                 >
-                  {index + 1}
-                </div>
-                <div>
-                  <div style={{ fontWeight: "bold", color: "#000" }}>
-                    {step}
+                  <div
+                    className={`step-circle ${
+                      index === activeStep ? "active" : ""
+                    }`}
+                  >
+                    {index + 1}
                   </div>
-                  <div style={{ fontSize: "14px", color: "#555" }}>
-                    Lorem ipsum dolor sit amet
+                  <div>
+                    <div className="step-title">{step}</div>
+                    <div className="step-subtitle">Placeholder</div>
                   </div>
-                </div>
-              </li>
-            ))}
+                </li>
+              )
+            )}
           </ol>
         </div>
-        <div style={{ flex: 3, marginLeft: 30 }}>{renderStepComponent()}</div>
+        <div className="form-container">{renderStepComponent()}</div>
       </div>
+
+      <style>
+        {`
+    .desktop-view {
+      display: flex;
+    }
+
+    .mobile-view {
+      display: block;
+      width: 80%;
+    }
+
+    .steps-container {
+      flex: 0.5;
+    }
+
+    .steps-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+      cursor: pointer;
+    }
+
+    .step-circle {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: #E3E3E3;
+      color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      margin-right: 15px;
+      margin-top: 15px
+    }
+
+    .step-circle.active {
+      background-color: #000;
+      color: #FFF;
+    }
+
+    .step-title {
+      font-weight: bold;
+      color: #000;
+    }
+
+    .step-subtitle {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .form-container {
+      flex: 3;
+      margin-left: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .steps-container {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+        flex-wrap: wrap; /* Allow step items to wrap */
+      }
+
+      .steps-list {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        flex-wrap: wrap; /* Allow step items to wrap */
+      }
+
+      .step-item {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 0;
+        margin-right: 10px; 
+      }
+
+      .step-circle {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+
+      .form-container {
+        margin-left: 0;
+      }
+    }
+  `}
+      </style>
     </div>
   );
 }

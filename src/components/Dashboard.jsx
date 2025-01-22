@@ -100,121 +100,11 @@ const funds = [
     KYC: "Verified",
     risk: "Low",
   },
-  {
-    id: 10,
-    name: "Emerging Markets Fund",
-    manager: "Jane Taylor",
-    AUM: "1.8M",
-    status: "Inactive",
-    investors: 90,
-    KYC: "Pending",
-    risk: "Medium",
-  },
-  {
-    id: 11,
-    name: "Dividend Fund",
-    manager: "Kevin Moore",
-    AUM: "700K",
-    status: "Active",
-    investors: 110,
-    KYC: "Verified",
-    risk: "Low",
-  },
-  {
-    id: 12,
-    name: "Growth and Income Fund",
-    manager: "Laura King",
-    AUM: "2.1M",
-    status: "Active",
-    investors: 240,
-    KYC: "Verified",
-    risk: "Medium",
-  },
-  {
-    id: 13,
-    name: "Sustainable Fund",
-    manager: "Mike Green",
-    AUM: "900K",
-    status: "Inactive",
-    investors: 70,
-    KYC: "Pending",
-    risk: "Low",
-  },
-  {
-    id: 14,
-    name: "High Yield Fund",
-    manager: "Nina Brown",
-    AUM: "1.4M",
-    status: "Active",
-    investors: 170,
-    KYC: "Verified",
-    risk: "High",
-  },
-  {
-    id: 15,
-    name: "Bond Fund",
-    manager: "Oscar White",
-    AUM: "3.2M",
-    status: "Inactive",
-    investors: 250,
-    KYC: "Verified",
-    risk: "Low",
-  },
-  {
-    id: 16,
-    name: "Index Fund",
-    manager: "Paula Gray",
-    AUM: "4.5M",
-    status: "Active",
-    investors: 600,
-    KYC: "Verified",
-    risk: "Low",
-  },
-  {
-    id: 17,
-    name: "International Fund",
-    manager: "Quincy Black",
-    AUM: "1.7M",
-    status: "Inactive",
-    investors: 130,
-    KYC: "Pending",
-    risk: "Medium",
-  },
-  {
-    id: 18,
-    name: "Healthcare Fund",
-    manager: "Rachel Stone",
-    AUM: "2.3M",
-    status: "Active",
-    investors: 280,
-    KYC: "Verified",
-    risk: "Medium",
-  },
-  {
-    id: 19,
-    name: "Infrastructure Fund",
-    manager: "Sam Wells",
-    AUM: "3.8M",
-    status: "Active",
-    investors: 350,
-    KYC: "Verified",
-    risk: "Low",
-  },
-  {
-    id: 20,
-    name: "Commodity Fund",
-    manager: "Tina Young",
-    AUM: "1.1M",
-    status: "Inactive",
-    investors: 100,
-    KYC: "Pending",
-    risk: "High",
-  },
 ];
 
 function FundTable() {
   return (
-    <table border="1">
+    <table border="1" className="fund-table">
       <thead>
         <tr style={{ backgroundColor: "#F5F5F5", color: "#ffffff" }}>
           <th>FUND NAME</th>
@@ -504,9 +394,10 @@ function Dashboard() {
           Keep your pennies, I’m chasing dollars.
         </p>
         <div
+          className="button-wrapper"
           style={{
             display: "flex",
-            marginTop: 40,
+            // marginTop: 40,
             alignItems: "center",
             justifyContent: "space-between",
             animation: "fadeIn 1s ease-in",
@@ -545,7 +436,6 @@ function Dashboard() {
                 fontWeight: "bold",
                 cursor: "pointer",
                 transition: "all 0.3s ease",
-                marginLeft: 10,
                 animation: "slideInFromRight 0.5s ease-out",
                 "&:hover": {
                   transform: "scale(1.05)",
@@ -567,6 +457,54 @@ function Dashboard() {
       </div>
       <style>
         {`
+          .fund-table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+
+          @media (max-width: 768px) {
+            .fund-table {
+              display: block;
+              overflow-x: auto;
+              white-space: nowrap;
+            }
+
+            .view-head {
+              flex-direction: column;
+            }
+
+            .view-head img {
+              margin-bottom: 10px;
+            }
+
+            .view-head input {
+              width: 100%;
+              margin-bottom: 10px;
+            }
+
+            .title, .header, .sub-header {
+              text-align: center;
+            }
+
+            .header, .sub-header {
+              font-size: 1.2rem;
+              margin-bottom: 5px;
+            }
+
+            .title {
+              font-size: 1.5rem;
+            }
+
+            button {
+              width: 100%;
+              margin-top: 10px;
+            }
+              .button-wrapper {
+              flex-direction: column;
+              margin-bottom: 20px
+              }
+          }
+
           @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
