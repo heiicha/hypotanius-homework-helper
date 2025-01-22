@@ -376,7 +376,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <div>
+      <div className="content-container">
         <p
           className="header"
           style={{
@@ -457,12 +457,20 @@ function Dashboard() {
       </div>
       <style>
         {`
+          .content-container {
+            padding: 0 20px;
+          }
+
           .fund-table {
             width: 100%;
             border-collapse: collapse;
           }
 
           @media (max-width: 768px) {
+            .content-container {
+              padding: 0 10px;
+            }
+
             .fund-table {
               display: block;
               overflow-x: auto;
