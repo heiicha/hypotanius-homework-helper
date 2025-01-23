@@ -10,7 +10,6 @@ import Success from "./components/forms/Success";
 import Manage from "./components/Manage";
 import { createClient } from "@supabase/supabase-js";
 import Forgot from "./components/auth/Forgot";
-import { createClient } from "@supabase/supabase-js";
 
 export const supabase = createClient(
   "https://dzkrxhjgneqqvylereku.supabase.co",
