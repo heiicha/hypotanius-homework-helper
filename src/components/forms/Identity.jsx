@@ -1,25 +1,35 @@
 import React, { useState, useEffect } from "react";
 
 export default function Identity() {
-  const [identity, setIdentity] = useState({
-    fundName: "",
-    fundStatus: "",
-    currency: "",
-    legalForm: "",
-    dateIncorporation: "",
-    vintageYears: "",
-    fundType: "",
-    region: "",
-    geographyFocus: "",
-    sectorFocus: "",
-    strategy: "",
-    number: "",
+  const [identity, setIdentity] = useState(() => {
+    const saved = localStorage.getItem("identity");
+    return saved
+      ? JSON.parse(saved)
+      : {
+          fundName: "",
+          fundStatus: "",
+          currency: "",
+          legalForm: "",
+          dateIncorporation: "",
+          vintageYears: "",
+          fundType: "",
+          region: "",
+          geographyFocus: "",
+          sectorFocus: "",
+          strategy: "",
+          number: "",
+        };
   });
 
-  const handleChange = () => {
+  useEffect(() => {
+    localStorage.setItem("identity", JSON.stringify(identity));
+  }, [identity]);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
     setIdentity({
       ...identity,
-      [event.target.name]: event.target.value,
+      [name]: value,
     });
   };
 

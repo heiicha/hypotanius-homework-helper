@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function ManagementFee() {
-  const [management, setManagement] = useState({
-    managementFee: "",
-    fundInformation: "",
-    feeOutsideCommitment: "",
-    feeCallFrequency: "",
-    feePolicy: "",
+  const [management, setManagement] = useState(() => {
+    const saved = localStorage.getItem("management");
+    return saved
+      ? JSON.parse(saved)
+      : {
+          managementFee: "",
+          fundInformation: "",
+          feeOutsideCommitment: "",
+          feeCallFrequency: "",
+          feePolicy: "",
+        };
   });
+
+  useEffect(() => {
+    localStorage.setItem("management", JSON.stringify(management));
+  }, [management]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;

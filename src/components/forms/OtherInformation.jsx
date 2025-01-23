@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function OtherInformation() {
-  const [others, setOthers] = useState({
-    nameFund: "",
-    registeredAddress: "",
-    city: "",
-    state: "",
-    country: "",
-    zipCode: "",
-    description: "",
+  const [others, setOthers] = useState(() => {
+    const saved = localStorage.getItem("others");
+    return saved
+      ? JSON.parse(saved)
+      : {
+          nameFund: "",
+          registeredAddress: "",
+          city: "",
+          state: "",
+          country: "",
+          zipCode: "",
+          description: "",
+        };
   });
+
+  useEffect(() => {
+    localStorage.setItem("others", JSON.stringify(others));
+  }, [others]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,6 +27,8 @@ export default function OtherInformation() {
       [name]: value,
     }));
   };
+
+  console.log(others);
 
   return (
     <div>

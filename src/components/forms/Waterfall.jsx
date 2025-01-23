@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Waterfall() {
-  const [waterfall, setWaterfall] = useState({
-    hurdleRate: "",
-    secondHurdleRate: "",
-    hurdleDescription: "",
-    carriedInterest: "",
-    secondCarriedInterest: "",
-    carriedInterestDescription: "",
-    clawback: "",
+  const [waterfall, setWaterfall] = useState(() => {
+    const saved = localStorage.getItem("waterfall");
+    return saved
+      ? JSON.parse(saved)
+      : {
+          hurdleRate: "",
+          secondHurdleRate: "",
+          hurdleDescription: "",
+          carriedInterest: "",
+          secondCarriedInterest: "",
+          carriedInterestDescription: "",
+          clawback: "",
+        };
   });
+
+  useEffect(() => {
+    localStorage.setItem("waterfall", JSON.stringify(waterfall));
+  }, [waterfall]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
