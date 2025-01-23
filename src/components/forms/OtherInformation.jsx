@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function OtherInformation() {
+  const [others, setOthers] = useState({
+    nameFund: "",
+    registeredAddress: "",
+    city: "",
+    state: "",
+    country: "",
+    zipCode: "",
+    description: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setOthers((prevOthers) => ({
+      ...prevOthers,
+      [name]: value,
+    }));
+  };
+
   return (
     <div>
-      {/* Form Section */}
       <div style={{ display: "flex" }}>
-        {/* Form Content */}
         <div style={{ flex: 3 }}>
           <text style={{ color: "#505050" }}>Step 4</text> <br />
           <text
@@ -15,7 +31,6 @@ export default function OtherInformation() {
           </text>
           <br />
           <form style={{ display: "grid", gap: "25px" }}>
-            {/* Name Fund */}
             <div style={{ display: "flex", gap: "25px" }}>
               <div style={{ flex: 1 }}>
                 <label
@@ -25,11 +40,14 @@ export default function OtherInformation() {
                     color: "#000",
                   }}
                 >
-                  Name Fund
+                  House Number
                 </label>
                 <input
                   type="text"
+                  name="nameFund"
                   placeholder="Name fund..."
+                  value={others.nameFund}
+                  onChange={handleChange}
                   style={{
                     width: "80%",
                     padding: "12px",
@@ -52,7 +70,10 @@ export default function OtherInformation() {
                 </label>
                 <input
                   type="text"
+                  name="registeredAddress"
                   placeholder="Input Registered Address"
+                  value={others.registeredAddress}
+                  onChange={handleChange}
                   style={{
                     width: "80%",
                     padding: "12px",
@@ -65,7 +86,6 @@ export default function OtherInformation() {
               </div>
             </div>
 
-            {/* Currency */}
             <div style={{ display: "flex", gap: "25px" }}>
               <div style={{ flex: 1 }}>
                 <label
@@ -79,7 +99,10 @@ export default function OtherInformation() {
                 </label>
                 <input
                   type="text"
-                  placeholder="Input Registered Address"
+                  name="city"
+                  placeholder="Input City"
+                  value={others.city}
+                  onChange={handleChange}
                   style={{
                     width: "80%",
                     padding: "12px",
@@ -102,7 +125,10 @@ export default function OtherInformation() {
                 </label>
                 <input
                   type="text"
-                  placeholder="Input House Number"
+                  name="state"
+                  placeholder="Input State"
+                  value={others.state}
+                  onChange={handleChange}
                   style={{
                     width: "80%",
                     padding: "12px",
@@ -115,7 +141,6 @@ export default function OtherInformation() {
               </div>
             </div>
 
-            {/* Other Fields */}
             <div style={{ display: "flex", gap: "25px" }}>
               <div style={{ flex: 1 }}>
                 <label
@@ -129,7 +154,10 @@ export default function OtherInformation() {
                 </label>
                 <input
                   type="text"
-                  placeholder="DD/MM/YYYY"
+                  name="country"
+                  placeholder="Input Country"
+                  value={others.country}
+                  onChange={handleChange}
                   style={{
                     width: "80%",
                     padding: "12px",
@@ -152,7 +180,10 @@ export default function OtherInformation() {
                 </label>
                 <input
                   type="text"
-                  placeholder="Input Registered Address"
+                  name="zipCode"
+                  placeholder="Input ZIP Code"
+                  value={others.zipCode}
+                  onChange={handleChange}
                   style={{
                     width: "80%",
                     padding: "12px",
@@ -165,7 +196,6 @@ export default function OtherInformation() {
               </div>
             </div>
 
-            {/* Strategy */}
             <div>
               <div style={{ flex: 1 }}>
                 <label
@@ -179,7 +209,10 @@ export default function OtherInformation() {
                 </label>
                 <input
                   type="text"
-                  placeholder="Desription"
+                  name="description"
+                  placeholder="Description"
+                  value={others.description}
+                  onChange={handleChange}
                   style={{
                     width: "80%",
                     padding: "12px",
@@ -195,7 +228,6 @@ export default function OtherInformation() {
         </div>
       </div>
 
-      {/* Media Queries */}
       <style>
         {`
           @media (max-width: 768px) {

@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function ManagementFee() {
+  const [management, setManagement] = useState({
+    managementFee: "",
+    fundInformation: "",
+    feeOutsideCommitment: "",
+    feeCallFrequency: "",
+    feePolicy: "",
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setManagement({
+      ...management,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div>
-      {/* Form Section */}
       <div style={{ display: "flex" }}>
-        {/* Form Content */}
         <div style={{ flex: 3 }}>
           <text style={{ color: "#505050" }}>Step 2</text> <br />
           <text
@@ -14,7 +32,6 @@ export default function ManagementFee() {
             Management Fee
           </text>
           <br />
-          {/* Management Fee */}
           <div style={{ flex: 1 }}>
             <label
               style={{
@@ -27,6 +44,9 @@ export default function ManagementFee() {
             </label>
             <input
               type="text"
+              name="managementFee"
+              value={management.managementFee}
+              onChange={handleInputChange}
               placeholder="$ input your amount"
               style={{
                 width: "50%",
@@ -38,8 +58,10 @@ export default function ManagementFee() {
               }}
             />
           </div>
-          <form style={{ display: "grid", gap: "25px" }}>
-            {/* Information Fund */}
+          <form
+            onSubmit={handleSubmit}
+            style={{ display: "grid", gap: "25px" }}
+          >
             <div style={{ marginTop: 20 }}>
               <label
                 style={{ display: "block", marginBottom: "8px", color: "#000" }}
@@ -63,16 +85,35 @@ export default function ManagementFee() {
                   >
                     <input
                       type="radio"
-                      name="typeFund"
+                      name="fundInformation"
+                      value={type}
+                      checked={management.fundInformation === type}
+                      onChange={handleInputChange}
                       style={{ marginRight: "8px" }}
                     />
                     {type}
                   </label>
                 ))}
               </div>
+              {management.fundInformation === "Other" && (
+                <input
+                  type="text"
+                  name="fundInformationOther"
+                  value={management.fundInformationOther}
+                  onChange={handleInputChange}
+                  placeholder="Other"
+                  style={{
+                    marginTop: "10px",
+                    padding: "12px",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    backgroundColor: "#fff",
+                    color: "#000",
+                  }}
+                />
+              )}
             </div>
 
-            {/* Manage Commitment */}
             <div style={{ marginTop: 0 }}>
               <label
                 style={{ display: "block", marginBottom: "8px", color: "#000" }}
@@ -91,7 +132,10 @@ export default function ManagementFee() {
                   >
                     <input
                       type="radio"
-                      name="typeFund"
+                      name="feeOutsideCommitment"
+                      value={type}
+                      checked={management.feeOutsideCommitment === type}
+                      onChange={handleInputChange}
                       style={{ marginRight: "8px" }}
                     />
                     {type}
@@ -99,8 +143,6 @@ export default function ManagementFee() {
                 ))}
               </div>
             </div>
-
-            {/* Name Fund */}
             <div style={{ display: "flex", gap: "25px" }}>
               <div style={{ flex: 1 }}>
                 <label
@@ -110,9 +152,12 @@ export default function ManagementFee() {
                     color: "#000",
                   }}
                 >
-                  Free Call Frequency
+                  Fee Call Frequency
                 </label>
                 <select
+                  name="feeCallFrequency"
+                  value={management.feeCallFrequency}
+                  onChange={handleInputChange}
                   style={{
                     width: "52%",
                     padding: "12px",
@@ -122,10 +167,14 @@ export default function ManagementFee() {
                     color: "#000",
                   }}
                 >
-                  <option>Select Management fee</option>
+                  <option value="">Select Management fee</option>
+                  <option value="USD">USD</option>
+                  <option value="SGD">SGD</option>
+                  <option value="Yen">Yen</option>
                 </select>
               </div>
             </div>
+
             <div style={{ flex: 1 }}>
               <label
                 style={{
@@ -136,17 +185,19 @@ export default function ManagementFee() {
               >
                 Fee Policy
               </label>
-              <input
-                type="text"
+              <textarea
+                name="feePolicy"
+                value={management.feePolicy}
+                onChange={handleInputChange}
                 placeholder="Description fee policy"
                 style={{
                   width: "50%",
-                  height: "200%",
                   padding: "12px",
                   border: "1px solid #ccc",
                   borderRadius: "5px",
                   backgroundColor: "#fff",
                   color: "#000",
+                  height: "100px",
                 }}
               />
             </div>
@@ -154,7 +205,6 @@ export default function ManagementFee() {
         </div>
       </div>
 
-      {/* Media Queries */}
       <style>
         {`
           @media (max-width: 768px) {
@@ -169,7 +219,7 @@ export default function ManagementFee() {
               display: block;
               width: 100%;
             }
-            select, input[type="text"] {
+            select, input[type="text"], textarea {
               width: 100%;
             }
           }

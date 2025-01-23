@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Identity() {
+  const [identity, setIdentity] = useState({
+    fundName: "",
+    fundStatus: "",
+    currency: "",
+    legalForm: "",
+    dateIncorporation: "",
+    vintageYears: "",
+    fundType: "",
+    region: "",
+    geographyFocus: "",
+    sectorFocus: "",
+    strategy: "",
+    number: "",
+  });
+
+  const handleChange = () => {
+    setIdentity({
+      ...identity,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   return (
     <div>
-      {/* Form Section */}
       <div style={{ display: "flex" }}>
-        {/* Form Content */}
         <div style={{ flex: 3 }}>
           <text style={{ color: "#505050" }}>Step 1</text> <br />
           <text
@@ -15,7 +35,6 @@ export default function Identity() {
           </text>
           <br />
           <form style={{ display: "grid", gap: "25px" }}>
-            {/* Type Fund */}
             <div style={{ marginTop: 20 }}>
               <label
                 style={{ display: "block", marginBottom: "8px", color: "#000" }}
@@ -39,7 +58,10 @@ export default function Identity() {
                   >
                     <input
                       type="radio"
-                      name="typeFund"
+                      name="fundType"
+                      value={type}
+                      checked={identity.fundType === type}
+                      onChange={handleChange}
                       style={{ marginRight: "8px" }}
                     />
                     {type}
@@ -61,7 +83,6 @@ export default function Identity() {
               </div>
             </div>
 
-            {/* Name Fund */}
             <div style={{ display: "flex", gap: "25px" }}>
               <div style={{ flex: 1 }}>
                 <label
@@ -75,7 +96,10 @@ export default function Identity() {
                 </label>
                 <input
                   type="text"
+                  name="fundName"
                   placeholder="Name fund..."
+                  value={identity.fundName}
+                  onChange={handleChange}
                   style={{
                     width: "80%",
                     padding: "12px",
@@ -97,6 +121,9 @@ export default function Identity() {
                   Fund Status
                 </label>
                 <select
+                  name="fundStatus"
+                  value={identity.fundStatus}
+                  onChange={handleChange}
                   style={{
                     width: "84%",
                     padding: "12px",
@@ -107,11 +134,12 @@ export default function Identity() {
                   }}
                 >
                   <option>Select fund status</option>
+                  <option value="Open">Open</option>
+                  <option value="Closed">Closed</option>
                 </select>
               </div>
             </div>
 
-            {/* Currency */}
             <div style={{ display: "flex", gap: "25px" }}>
               <div style={{ flex: 1 }}>
                 <label
@@ -124,6 +152,9 @@ export default function Identity() {
                   Currency
                 </label>
                 <select
+                  name="currency"
+                  value={identity.currency}
+                  onChange={handleChange}
                   style={{
                     width: "84%",
                     padding: "12px",
@@ -134,6 +165,9 @@ export default function Identity() {
                   }}
                 >
                   <option>Select currency</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                  <option value="GBP">GBP</option>
                 </select>
               </div>
               <div style={{ flex: 1 }}>
@@ -147,6 +181,9 @@ export default function Identity() {
                   Legal Form
                 </label>
                 <select
+                  name="legalForm"
+                  value={identity.legalForm}
+                  onChange={handleChange}
                   style={{
                     width: "84%",
                     padding: "12px",
@@ -157,11 +194,13 @@ export default function Identity() {
                   }}
                 >
                   <option>Select legal form</option>
+                  <option value="LLC">LLC</option>
+                  <option value="Corporation">Corporation</option>
+                  <option value="Partnership">Partnership</option>
                 </select>
               </div>
             </div>
 
-            {/* Other Fields */}
             <div style={{ display: "flex", gap: "25px" }}>
               <div style={{ flex: 1 }}>
                 <label
@@ -175,7 +214,10 @@ export default function Identity() {
                 </label>
                 <input
                   type="text"
+                  name="dateIncorporation"
                   placeholder="DD/MM/YYYY"
+                  value={identity.dateIncorporation}
+                  onChange={handleChange}
                   style={{
                     width: "80%",
                     padding: "12px",
@@ -198,7 +240,10 @@ export default function Identity() {
                 </label>
                 <input
                   type="text"
+                  name="vintageYears"
                   placeholder="e.g. 2004"
+                  value={identity.vintageYears}
+                  onChange={handleChange}
                   style={{
                     width: "80%",
                     padding: "12px",
@@ -211,7 +256,6 @@ export default function Identity() {
               </div>
             </div>
 
-            {/* Strategy */}
             <div>
               <label
                 style={{ display: "block", marginBottom: "8px", color: "#000" }}
@@ -220,17 +264,20 @@ export default function Identity() {
               </label>
               <div style={{ display: "flex", gap: "25px", color: "#000" }}>
                 {["Real Estate", "Real Estate Core", "Other"].map(
-                  (strategy) => (
+                  (strategyOption) => (
                     <label
-                      key={strategy}
+                      key={strategyOption}
                       style={{ display: "flex", alignItems: "center" }}
                     >
                       <input
                         type="radio"
                         name="strategy"
+                        value={strategyOption}
+                        checked={identity.strategy === strategyOption}
+                        onChange={handleChange}
                         style={{ marginRight: "8px", color: "#000" }}
                       />
-                      {strategy}
+                      {strategyOption}
                     </label>
                   )
                 )}
@@ -260,6 +307,9 @@ export default function Identity() {
                     Geography Focus
                   </label>
                   <select
+                    name="geographyFocus"
+                    value={identity.geographyFocus}
+                    onChange={handleChange}
                     style={{
                       width: "84%",
                       padding: "12px",
@@ -270,6 +320,9 @@ export default function Identity() {
                     }}
                   >
                     <option>Select geography focus</option>
+                    <option value="North America">North America</option>
+                    <option value="Europe">Europe</option>
+                    <option value="Asia">Asia</option>
                   </select>
                 </div>
                 <div style={{ flex: 1 }}>
@@ -283,6 +336,9 @@ export default function Identity() {
                     Sector Focus
                   </label>
                   <select
+                    name="sectorFocus"
+                    value={identity.sectorFocus}
+                    onChange={handleChange}
                     style={{
                       width: "84%",
                       padding: "12px",
@@ -293,6 +349,9 @@ export default function Identity() {
                     }}
                   >
                     <option>Select sector focus</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Finance">Finance</option>
                   </select>
                 </div>
               </div>
@@ -308,7 +367,10 @@ export default function Identity() {
                 </label>
                 <input
                   type="text"
+                  name="number"
                   placeholder="Input code unique number"
+                  value={identity.number}
+                  onChange={handleChange}
                   style={{
                     width: "80%",
                     padding: "12px",
@@ -324,7 +386,6 @@ export default function Identity() {
         </div>
       </div>
 
-      {/* Media Queries */}
       <style>
         {`
           @media (max-width: 768px) {

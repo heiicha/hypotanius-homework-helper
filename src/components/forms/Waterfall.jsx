@@ -1,20 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Waterfall() {
+  const [waterfall, setWaterfall] = useState({
+    hurdleRate: "",
+    secondHurdleRate: "",
+    hurdleDescription: "",
+    carriedInterest: "",
+    secondCarriedInterest: "",
+    carriedInterestDescription: "",
+    clawback: "",
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setWaterfall({
+      ...waterfall,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div>
-      {/* Form Section */}
       <div style={{ display: "flex" }}>
-        {/* Form Content */}
         <div style={{ flex: 3 }}>
           <text style={{ color: "#505050" }}>Step 3</text> <br />
           <text style={{ color: "#000000", fontSize: 25 }}>Waterfall</text>
           <br />
-          <form style={{ display: "grid" }}>
-            {/* Type Fund */}
+          <form onSubmit={handleSubmit} style={{ display: "grid" }}>
             <div style={{ marginTop: 20 }}></div>
 
-            {/* Hurdle Rate */}
             <div style={{ display: "flex", gap: "25px" }}>
               <div style={{ flex: 1 }}>
                 <label
@@ -28,6 +46,9 @@ export default function Waterfall() {
                 </label>
                 <input
                   type="text"
+                  name="hurdleRate"
+                  value={waterfall.hurdleRate}
+                  onChange={handleInputChange}
                   placeholder="$ Input hurdle rates"
                   style={{
                     width: "80%",
@@ -51,6 +72,9 @@ export default function Waterfall() {
                 </label>
                 <input
                   type="text"
+                  name="secondHurdleRate"
+                  value={waterfall.secondHurdleRate}
+                  onChange={handleInputChange}
                   placeholder="$ input second hurdle rate"
                   style={{
                     width: "80%",
@@ -64,9 +88,6 @@ export default function Waterfall() {
               </div>
             </div>
 
-            {/* Currency */}
-
-            {/* Other Fields */}
             <div style={{ display: "flex", gap: "25px" }}>
               <div style={{ flex: 1 }}>
                 <label
@@ -80,6 +101,9 @@ export default function Waterfall() {
                 </label>
                 <input
                   type="text"
+                  name="hurdleDescription"
+                  value={waterfall.hurdleDescription}
+                  onChange={handleInputChange}
                   placeholder="Description hurdle"
                   style={{
                     width: "80%",
@@ -93,7 +117,6 @@ export default function Waterfall() {
               </div>
             </div>
 
-            {/* Strategy */}
             <div>
               <div style={{ display: "flex", gap: "30px" }}>
                 <div style={{ flex: 1 }}>
@@ -104,11 +127,14 @@ export default function Waterfall() {
                       color: "#000",
                     }}
                   >
-                    Carried Intersted
+                    Carried Interest
                   </label>
                   <input
                     type="text"
-                    placeholder="$ input Carried Intersted"
+                    name="carriedInterest"
+                    value={waterfall.carriedInterest}
+                    onChange={handleInputChange}
+                    placeholder="$ input Carried Interest"
                     style={{
                       width: "80%",
                       padding: "12px",
@@ -127,11 +153,14 @@ export default function Waterfall() {
                       color: "#000",
                     }}
                   >
-                    Second Carried Intersted
+                    Second Carried Interest
                   </label>
                   <input
                     type="text"
-                    placeholder="$ input second carried intersted"
+                    name="secondCarriedInterest"
+                    value={waterfall.secondCarriedInterest}
+                    onChange={handleInputChange}
+                    placeholder="$ input second carried interest"
                     style={{
                       width: "80%",
                       padding: "12px",
@@ -151,11 +180,14 @@ export default function Waterfall() {
                     color: "#000",
                   }}
                 >
-                  Carried Intersted Description
+                  Carried Interest Description
                 </label>
                 <input
                   type="text"
-                  placeholder="Description Carried Intersted"
+                  name="carriedInterestDescription"
+                  value={waterfall.carriedInterestDescription}
+                  onChange={handleInputChange}
+                  placeholder="Description Carried Interest"
                   style={{
                     width: "80%",
                     padding: "12px",
@@ -180,7 +212,10 @@ export default function Waterfall() {
                     >
                       <input
                         type="radio"
-                        name="strategy"
+                        name="clawback"
+                        value={strategy}
+                        checked={waterfall.clawback === strategy}
+                        onChange={handleInputChange}
                         style={{ marginRight: "8px", color: "#000" }}
                       />
                       {strategy}
@@ -193,7 +228,6 @@ export default function Waterfall() {
         </div>
       </div>
 
-      {/* Media Queries */}
       <style>
         {`
           @media (max-width: 768px) {
