@@ -8,6 +8,7 @@ import Verification from "./components/auth/Verification";
 import Create from "./components/Create";
 import Success from "./components/forms/Success";
 import Manage from "./components/Manage";
+import { createClient } from "@supabase/supabase-js";
 import Forgot from "./components/auth/Forgot";
 
 const supabase = createClient(
