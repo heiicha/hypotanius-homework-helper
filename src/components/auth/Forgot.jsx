@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { supabase } from "../../App";
@@ -16,6 +15,19 @@ function ForgotPassword() {
         console.error("Error:", error.message);
       } else {
         setIsSent(true);
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error.message);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.error("Error logging out:", error.message);
+      } else {
+        navigate("/login");
       }
     } catch (error) {
       console.error("Unexpected error:", error.message);
@@ -125,12 +137,12 @@ function ForgotPassword() {
               fontWeight: "bold",
               transition: "background-color 0.3s ease",
             }}
-            onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor = "#0056b3")
-            }
-            onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor = "#007BFF")
-            }
+            // onMouseOver={(e) =>
+            //   (e.currentTarget.style.backgroundColor = "#0056b3")
+            // }
+            // onMouseOut={(e) =>
+            //   (e.currentTarget.style.backgroundColor = "#007BFF")
+            // }
           >
             Send Reset Link
           </button>
@@ -146,6 +158,30 @@ function ForgotPassword() {
               A password reset link has been sent to your email.
             </p>
           )}
+          <button
+            onClick={handleLogout}
+            style={{
+              marginTop: "20px",
+              width: "100%",
+              padding: "14px 20px",
+              backgroundColor: "#ff4d4d",
+              border: "2px solid #E0E0E0",
+              borderRadius: "8px",
+              color: "white",
+              cursor: "pointer",
+              fontSize: "16px",
+              fontWeight: "bold",
+              transition: "background-color 0.3s ease",
+            }}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.backgroundColor = "#ff6666")
+            }
+            onMouseOut={(e) =>
+              (e.currentTarget.style.backgroundColor = "#ff4d4d")
+            }
+          >
+            Logout
+          </button>
         </div>
       </div>
     </>
