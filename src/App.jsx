@@ -10,6 +10,11 @@ import Success from "./components/forms/Success";
 import Manage from "./components/Manage";
 import Forgot from "./components/auth/Forgot";
 
+const supabase = createClient(
+  "https://dzkrxhjgneqqvylereku.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR6a3J4aGpnbmVxcXZ5bGVyZWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY2OTIzNDcsImV4cCI6MjA1MjI2ODM0N30.94q-TVZxU6jDPRDQStAMQhBrbCRrlOprEw-k3MI51_I"
+);
+
 export default function App() {
   return (
     <Router>
