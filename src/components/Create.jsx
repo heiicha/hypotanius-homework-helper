@@ -4,6 +4,7 @@ import Identity from "./forms/Identity";
 import ManagementFee from "./forms/ManagementFee";
 import Waterfall from "./forms/Waterfall";
 import OtherInformation from "./forms/OtherInformation";
+import uploadToSupabase from "./forms/Master";
 
 export default function CreateFundForm() {
   const navigate = useNavigate();
@@ -41,6 +42,7 @@ export default function CreateFundForm() {
 
       if (confirmSubmission) {
         navigate("/form-success");
+        uploadToSupabase()
       }
     }
   };
