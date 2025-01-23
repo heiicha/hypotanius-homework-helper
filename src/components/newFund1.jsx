@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import { useState } from "react";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import "./App.css";
+=======
+import { useState } from 'react';
+import 'react-dropdown/style.css';
+import './App.css';
+>>>>>>> 800e0476605f898418af81df656b482aec7f503d
 
 function newFundForm1() {
   const [inputs, setInputs] = useState({
