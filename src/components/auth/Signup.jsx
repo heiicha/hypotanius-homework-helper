@@ -110,6 +110,9 @@ export default function Signup() {
               filter: "drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))",
             }}
           />
+          <p style={{ color: "black", fontWeight: "bold", fontSize: 30 }}>
+            Welcome to Fundora! 👋
+          </p>
 
           {error && (
             <div
