@@ -278,8 +278,6 @@ export default function Login() {
             display: "flex",
             justifyContent: "right",
             backgroundColor: "#CBCBCB",
-            overflow: "hidden",
-            flex: 1,
           }}
         >
           <img
