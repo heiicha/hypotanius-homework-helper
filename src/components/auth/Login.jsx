@@ -92,12 +92,15 @@ export default function Login() {
               width: "180px",
               marginBottom: "40px",
               display: "block",
-              marginLeft: "auto",
               marginRight: "auto",
               animation: "fadeInRotate 1s ease-out",
               filter: "drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))",
             }}
           />
+
+          <p style={{ color: "black", fontWeight: "bold", fontSize: 30 }}>
+            Welcome back! 👋
+          </p>
           {error && (
             <div
               style={{
