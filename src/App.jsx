@@ -9,7 +9,8 @@ import Create from "./components/Create";
 import Success from "./components/forms/Success";
 import Manage from "./components/Manage";
 import { createClient } from "@supabase/supabase-js";
-import Forgot from "./components/auth/Forgot";
+import Forgot from "./components/auth/Account";
+import Account from "./components/auth/Account";
 
 export const supabase = createClient(
   "https://dzkrxhjgneqqvylereku.supabase.co",
@@ -28,7 +29,7 @@ export default function App() {
         <Route path="/create" element={<Create />} />
         <Route path="/form-success" element={<Success />} />
         <Route path="/manage" element={<Manage />} />
-        <Route path="/forgot" element={<Forgot />} />
+        <Route path="/account" element={<Account />} />
       </Routes>
     </Router>
   );

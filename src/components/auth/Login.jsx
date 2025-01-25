@@ -11,6 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -121,15 +122,15 @@ export default function Login() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
+                placeholder="Enter email"
                 style={{
                   width: "90%",
                   padding: "16px 20px",
                   fontSize: "16px",
                   border: "2px solid #eef2f7",
                   borderRadius: "16px",
-                  marginBottom: "20px",
                   transition: "all 0.4s ease",
+                  marginBottom: 20,
                   outline: "none",
                   backgroundColor: "rgba(255, 255, 255, 0.9)",
                   boxShadow: "0 2px 4px rgba(0, 0, 0, 0.02)",
@@ -138,26 +139,47 @@ export default function Login() {
                 required
                 disabled={loading}
               />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-                style={{
-                  width: "90%",
-                  padding: "16px 20px",
-                  fontSize: "16px",
-                  border: "2px solid #eef2f7",
-                  borderRadius: "16px",
-                  transition: "all 0.4s ease",
-                  outline: "none",
-                  backgroundColor: "rgba(255, 255, 255, 0.9)",
-                  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.02)",
-                  color: "#000000",
-                }}
-                required
-                disabled={loading}
-              />
+
+              <div style={{ position: "relative", width: "90%" }}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter password"
+                  style={{
+                    width: "100%",
+                    padding: "16px 20px",
+                    fontSize: "16px",
+                    border: "2px solid #eef2f7",
+                    borderRadius: "16px",
+                    transition: "all 0.4s ease",
+                    outline: "none",
+                    backgroundColor: "rgba(255, 255, 255, 0.9)",
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.02)",
+                    color: "#000000",
+                  }}
+                  required
+                  disabled={loading}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    position: "absolute",
+                    alignSelf: "right",
+                    top: "50%",
+                    right: "0px",
+                    transform: "translateY(-50%)",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    color: "#000",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {showPassword ? "hide" : "show"}
+                </button>
+              </div>
             </div>
             <button
               type="submit"
@@ -188,10 +210,12 @@ export default function Login() {
               style={{
                 color: "#000",
                 textDecoration: "underline",
-                fontWeight: "600",
+                fontWeight: "500",
                 transition: "all 0.3s ease",
                 borderBottom: "2px solid transparent",
                 padding: "2px 4px",
+                cursor: "pointer",
+                fontSize: 15,
               }}
             >
               Forgot password?

@@ -5,7 +5,6 @@ import profile from "./../assets/pfp.jpeg";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../App";
 
-
 const funds = [
   {
     id: 1,
@@ -421,7 +420,7 @@ function Dashboard() {
         >
           <div
             style={{ marginRight: "10px", cursor: "pointer" }}
-            onClick={() => navigate("/forgot")}
+            onClick={() => navigate("/account")}
           >
             <span
               style={{
