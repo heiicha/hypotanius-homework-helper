@@ -120,7 +120,177 @@ function Account() {
         );
       case "notifications":
         return (
-          <div style={{ color: "black" }}>Notification settings go here.</div>
+          <div>
+            <h2 style={{ color: "black" }}>Notification Settings</h2>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "10px",
+              }}
+            >
+              <p
+                style={{
+                  flex: 1,
+                  color: "black",
+                  fontSize: 17,
+                }}
+              >
+                <span style={{ fontWeight: "bold" }}>Email Notifications</span>
+                <br />
+                <span
+                  style={{
+                    color: "#7D858E",
+                    fontSize: 15,
+                    fontWeight: "inherit",
+                  }}
+                >
+                  Receive updates about your account.
+                </span>
+              </p>
+              <label className="switch">
+                <input type="checkbox" />
+                <span className="slider round"></span>
+              </label>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "10px",
+              }}
+            >
+              <p
+                style={{
+                  flex: 1,
+                  color: "black",
+                  fontSize: 17,
+                }}
+              >
+                <span style={{ fontWeight: "bold" }}>SMS Notifications</span>
+                <br />
+                <span
+                  style={{
+                    color: "#7D858E",
+                    fontSize: 15,
+                    fontWeight: "inherit",
+                  }}
+                >
+                  Receive updates about your account.
+                </span>
+              </p>
+              <label className="switch">
+                <input type="checkbox" />
+                <span className="slider round"></span>
+              </label>
+            </div>
+            <h2 style={{ color: "black" }}>Privacy Settings</h2>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "10px",
+              }}
+            >
+              <p
+                style={{
+                  flex: 1,
+                  color: "black",
+                  fontSize: 17,
+                }}
+              >
+                <span style={{ fontWeight: "bold" }}>Data Sharing</span>
+                <br />
+                <span
+                  style={{
+                    color: "#7D858E",
+                    fontSize: 15,
+                    fontWeight: "inherit",
+                  }}
+                >
+                  Share data across devices and accounts.
+                </span>
+              </p>
+              <label className="switch">
+                <input type="checkbox" />
+                <span className="slider round"></span>
+              </label>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "10px",
+              }}
+            >
+              <p
+                style={{
+                  flex: 1,
+                  color: "black",
+                  fontSize: 17,
+                }}
+              >
+                <span style={{ fontWeight: "bold" }}>Access Permissions</span>
+                <br />
+                <span
+                  style={{
+                    color: "#7D858E",
+                    fontSize: 15,
+                    fontWeight: "inherit",
+                  }}
+                >
+                  Manage who can view your account.
+                </span>
+              </p>
+              <label className="switch">
+                <input type="checkbox" />
+                <span className="slider round"></span>
+              </label>
+            </div>
+            <style>
+              {`
+              .switch {
+                position: relative;
+                display: inline-block;
+                width: 34px;
+                height: 20px;
+              }
+              .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+              }
+              .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                transition: .4s;
+                border-radius: 34px;
+              }
+              .slider:before {
+                position: absolute;
+                content: "";
+                height: 14px;
+                width: 14px;
+                left: 3px;
+                bottom: 3px;
+                background-color: white;
+                transition: .4s;
+                border-radius: 50%;
+              }
+              input:checked + .slider {
+                background-color: #000;
+              }
+              input:checked + .slider:before {
+                transform: translateX(14px);
+              }
+            `}
+            </style>
+          </div>
         );
       case "password":
         return <Password />;
@@ -194,14 +364,14 @@ function Account() {
         <button
           onClick={() => setActiveTab("personal")}
           style={{
-            flex: 1,
-            padding: "10px",
+            padding: "10px 20px",
             border: "none",
-            backgroundColor: activeTab === "personal" ? "#f5f5f5" : "white",
+            backgroundColor: "transparent",
+            borderBottom: activeTab === "personal" ? "3px solid black" : "none",
             cursor: "pointer",
-            color: "black",
-            fontWeight: "bold",
-            fontSize: 15,
+            fontWeight: activeTab === "personal" ? "bold" : "normal",
+            color: activeTab === "personal" ? "black" : "#6B6B6B",
+            transition: "all 0.3s ease-in-out",
           }}
         >
           Personal Information
@@ -209,15 +379,15 @@ function Account() {
         <button
           onClick={() => setActiveTab("notifications")}
           style={{
-            flex: 1,
-            padding: "10px",
+            padding: "10px 20px",
             border: "none",
-            backgroundColor:
-              activeTab === "notifications" ? "#f5f5f5" : "white",
+            backgroundColor: "transparent",
+            borderBottom:
+              activeTab === "notifications" ? "3px solid black" : "none",
             cursor: "pointer",
-            color: "black",
-            fontWeight: "bold",
-            fontSize: 15,
+            fontWeight: activeTab === "notifications" ? "bold" : "normal",
+            color: activeTab === "notifications" ? "black" : "#6B6B6B",
+            transition: "all 0.3s ease-in-out",
           }}
         >
           Notifications
@@ -225,17 +395,17 @@ function Account() {
         <button
           onClick={() => setActiveTab("password")}
           style={{
-            flex: 1,
-            padding: "10px",
+            padding: "10px 20px",
             border: "none",
-            backgroundColor: activeTab === "password" ? "#f5f5f5" : "white",
+            backgroundColor: "transparent",
+            borderBottom: activeTab === "password" ? "3px solid black" : "none",
             cursor: "pointer",
-            color: "black",
-            fontWeight: "bold",
-            fontSize: 15,
+            fontWeight: activeTab === "password" ? "bold" : "normal",
+            color: activeTab === "password" ? "black" : "#6B6B6B",
+            transition: "all 0.3s ease-in-out",
           }}
         >
-          Password
+          Passsword
         </button>
       </div>
 

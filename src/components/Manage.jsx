@@ -70,12 +70,7 @@ export default function Manage() {
       case "info":
         return (
           <div>
-            <h2>Informaton</h2>
-            <p style={{ color: "#868686" }}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
-              nesciunt, autem, voluptate, quas quos quod aspernatur voluptatum
-              quibusdam quae aut doloremque. Quisquam, quia. Quisquam, quia.
-            </p>
+            <p>Entry Type</p>
           </div>
         );
       case "analytics":
@@ -92,7 +87,9 @@ export default function Manage() {
                 }}
               >
                 <p>Total Funds</p>
-                <h2 style={{ margin: 0, color: "#2563eb" }}>${fund.AUM}</h2>
+                <h2 style={{ margin: 0, color: "#000", fontSize: 35 }}>
+                  ${fund.AUM}
+                </h2>
               </div>
               <div
                 style={{
@@ -104,7 +101,7 @@ export default function Manage() {
                 }}
               >
                 <p>Active Investors</p>
-                <h2 style={{ margin: 0, color: "#2563eb" }}>
+                <h2 style={{ margin: 0, color: "#2563eb", fontSize: 35 }}>
                   {fund.investors}
                 </h2>
               </div>
