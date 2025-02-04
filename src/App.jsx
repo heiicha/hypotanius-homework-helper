@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Investor from "./components/investor";
+import Reports from "./components/reports";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Verification from "./components/auth/Verification";
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/investor" element={<Investor />} />
+        <Route path="/reports" element={<Reports />} />
         <Route path="/login" element={<Login />} />
         <Route path="/verification" element={<Verification />} />
         <Route path="/create" element={<Create />} />
