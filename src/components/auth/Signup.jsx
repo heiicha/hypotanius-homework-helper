@@ -4,11 +4,8 @@ import companyLogo from "../../assets/logo.png";
 import welcomeImage from "../../assets/welcome.png";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../../App";
 
-const supabase = createClient(
-  "https://dzkrxhjgneqqvylereku.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR6a3J4aGpnbmVxcXZ5bGVyZWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY2OTIzNDcsImV4cCI6MjA1MjI2ODM0N30.94q-TVZxU6jDPRDQStAMQhBrbCRrlOprEw-k3MI51_I"
-);
 
 export default function Signup() {
   const [name, setName] = useState("");

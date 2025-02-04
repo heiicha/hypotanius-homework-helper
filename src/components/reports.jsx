@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./investor.css";
+import "./reports.css";
 import companyLogo from "./../assets/logo.png";
 import profile from "./../assets/pfp.jpeg";
 import { createClient } from "@supabase/supabase-js";
@@ -8,94 +8,86 @@ import { supabase } from "../App";
 
 
 function InvestorTable() {
-  const investors = [
-    {
-      id: 1,
-      investor_id: "#123NO42",
-      name: "Jane Smith",
-      amount: "1M",
-      status: "Active",
-      investors: 200,
-      KYC: "Verified",
-      risk: "High",
-    },
-    {
-      id: 2,
-      investor_id: "#123NO42",
-      name: "Jane Smith",
-      amount: "1M",
-      status: "Active",
-      investors: 200,
-      KYC: "Verified",
-      risk: "High",
-    },
-    {
-      id: 3,
-      investor_id: "#123NO42",
-      name: "Jane Smith",
-      amount: "1M",
-      status: "Active",
-      investors: 200,
-      KYC: "Verified",
-      risk: "High",
-    },
-  ];
+
+  const [reports, setReports] = useState([]);
+
+  async function listAllReports() {
+  
+    const { data, error } = await supabase
+    .storage
+    .from('1-reports')
+    .list('', {
+      limit: 100,
+      offset: 0,
+      sortBy: { column: 'created_at', order: 'asc'}
+    })
+  
+    return data
+  }
+
+  useEffect(() => {
+    const fetchReports = async () => {
+      const reportsData = await listAllReports();
+      console.log(reportsData)
+      setReports(reportsData); // Update the state with the fetched reports
+    };
+    
+    fetchReports();
+  }, []); 
 
   return (
     <table border="1">
       <thead>
         <tr style={{ backgroundColor: "#F5F5F5", color: "#ffffff" }}>
-          <th>ID</th>
-          <th>NAME</th>
-          <th>AMOUNT</th>
+          <th>REPORT NAME</th>
+          <th>REPORT TYPE</th>
+          <th>PERIOD</th>
+          <th>UPLOAD DATE</th>
+          <th>UPLOADING USER</th>
           <th>STATUS</th>
-          <th>INVESTORS</th>
-          <th>KYC</th>
-          <th>RISK LEVEL</th>
         </tr>
       </thead>
       <tbody>
-        {investors.map((investor) => (
+        {reports.map((report) => (
           <tr
-            key={investor.id}
+            key={report.id}
             style={{
               animation: "fadeIn 0.5s ease-in",
             }}
           >
-            <td>{investor.investor_id}</td>
-            <td>{investor.name}</td>
-            <td>{investor.amount}</td>
-            <td>
-              <span
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <span
-                  style={{
-                    display: "inline-block",
-                    width: "7px",
-                    height: "7px",
-                    borderRadius: "50%",
-                    backgroundColor:
-                      investor.status === "Active" ? "#77B254" : "#FB4141",
-                    marginRight: "8px",
-                    animation: "pulse 2s infinite",
-                  }}
-                ></span>
-                {investor.status}
-              </span>
-            </td>
-            <td>{investor.investors}</td>
-            <td>{investor.KYC}</td>
-            <td>{investor.risk}</td>
+            <td>{report.name.split('.')[0]}</td>
+            <td>{report.name.split('.')[2]}</td>
+            <td>{report.name.split('.')[3]}</td>
+            <td>{report.name.split('.')[4]}</td>
+            <td>{report.name.split('.')[5]}</td>
+            <td>{report.name.split('.')[6]}</td>
           </tr>
         ))}
       </tbody>
     </table>
   );
 }
+
+async function uploadToSupabase(file) {
+
+  const type = "Quarterly Report"
+  const period = "Jan-Mar 2025"
+  const date = "05 January 2025"
+  const user = "Jane Smith"
+  const status_point = "Active"
+  
+  var file_name = file.name
+  file_name = file_name.concat(".", type, ".", period, ".", date, ".", user, ".", status_point)
+
+  const { data, error } = await supabase
+  .storage
+  .from('1-reports')
+  .upload(file_name, file, {
+    cacheControl: '3600',
+    upsert: true
+  })
+}
+
 
 function Investor() {
   const [userData, setUserData] = useState({
@@ -141,9 +133,15 @@ function Investor() {
     fetchUserData();
   }, []);
   const navigate = useNavigate();
-  const handleNew = () => {
-    navigate("/create");
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      uploadToSupabase(file);
+    }
   };
+
+
 
   return (
     <>
@@ -260,7 +258,7 @@ function Investor() {
               Filter
             </button>
             <button
-              onClick={handleNew}
+              onClick={() => document.getElementById("fileInput").click()}
               style={{
                 padding: "10px 20px",
                 backgroundColor: "#000000",
@@ -278,8 +276,15 @@ function Investor() {
                 },
               }}
             >
-              Add Investor
+              Add Report
             </button>
+            <input
+            type="file"
+            id="fileInput"
+            accept=".xlsx, .xls"
+            onChange={handleFileChange}
+            style={{ display: "none" }}
+          />
           </div>
         </div>
         <InvestorTable />

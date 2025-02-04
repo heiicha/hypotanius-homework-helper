@@ -18,6 +18,14 @@ export default async function uploadToSupabase() {
     .select();
 
   console.log(data, error);
+
+  const { report_data, report_error } = await supabase
+  .storage
+  .createBucket('1-reports', {
+    public: true,
+    allowedMimeTypes: ['file/xlsx'],
+    fileSizeLimit: 1024
+  })
 }
 
 /*

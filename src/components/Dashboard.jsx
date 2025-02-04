@@ -329,6 +329,32 @@ function Modal({ isOpen, funds, onClose, onSelect }) {
   );
 }
 
+function NavBar() {
+  const [isActive, setIsActive] = useState(false);
+
+  const toggleActiveClass = () => {
+    setIsActive(!isActive);
+  };
+
+  const removeActive = () => {
+    setIsActive(false)
+  }
+
+  return (
+    <div style={{display:'flex' }}>
+      <header className="App-header">
+        <nav className="sidebar">
+          <ul>
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/investor">Investor Management</a></li>
+            <li><a href="/reports">Performance Reports</a></li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+  )
+}
+
 function Dashboard() {
   const [userData, setUserData] = useState({
     name: "",
@@ -393,6 +419,11 @@ function Dashboard() {
 
   return (
     <>
+    <div style={{display: "flex"}}>
+      <div style={{flex: "0.5"}}>
+        <NavBar />
+      </div>
+      <div style={{flex: "2"}}>
       <div className="view-head">
         <div style={{ display: "flex", alignItems: "center" }}>
           <img
@@ -636,6 +667,8 @@ function Dashboard() {
           }
         `}
       </style>
+      </div>
+      </div>
     </>
   );
 }
