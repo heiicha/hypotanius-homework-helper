@@ -420,9 +420,6 @@ function Dashboard() {
   return (
     <>
     <div style={{display: "flex"}}>
-      <div style={{flex: "0.5"}}>
-        <NavBar />
-      </div>
       <div style={{flex: "2"}}>
       <div className="view-head">
         <div style={{ display: "flex", alignItems: "center" }}>

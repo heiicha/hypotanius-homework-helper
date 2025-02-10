@@ -23,6 +23,32 @@ function readExcel(file) {
   reader.readAsArrayBuffer(file);
 }
 
+function NavBar() {
+  const [isActive, setIsActive] = useState(false);
+
+  const toggleActiveClass = () => {
+    setIsActive(!isActive);
+  };
+
+  const removeActive = () => {
+    setIsActive(false)
+  }
+
+  return (
+    <div style={{display:'flex' }}>
+      <header className="App-header">
+        <nav className="sidebar">
+          <ul>
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/investor">Investor Management</a></li>
+            <li><a href="/reports">Performance Reports</a></li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+  )
+}
+
 function createChart(categories, seriesData) {
   const options = {
     series: [
@@ -133,6 +159,10 @@ export default function Manage() {
     }
   };
   return (
+    <div style={{ display: "flex" }}>
+    <div style={{ flex: "0.5" }}>
+        <NavBar />
+    </div>
     <div
       style={{
         fontFamily: "Arial, sans-serif",
@@ -209,7 +239,6 @@ export default function Manage() {
           {fund.status}
         </span>
       </section>
-
       <section style={{ marginTop: "30px" }}>
         <h2>About Fund</h2>
         <p style={{ lineHeight: 1.6, width: "80%", color: "#868686" }}>
@@ -274,6 +303,7 @@ export default function Manage() {
         </button>
       </div>
       <section style={{ marginTop: "30px" }}>{renderContent()}</section>
+    </div>
     </div>
   );
 }
