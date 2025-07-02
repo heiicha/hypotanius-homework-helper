@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Red Hat Display', Arial, sans-serif;
+    background: #f8fafc;
+    color: #111;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Base styles */
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+h1, h2 {
+    font-family: 'Red Hat Display', Arial, sans-serif;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+h2 {
+    font-size: 48px;
+    margin-bottom: 32px;
+}
+
+/* Login Form */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 400px;
+    max-width: 90vw;
+}
+
+.login-form input {
+    padding: 20px 24px;
+    font-size: 32px;
+    border-radius: 16px;
+    border: 3px solid #222;
+    outline: none;
+    background: #fff;
+    color: #000;
+    margin-bottom: 0;
+    font-family: 'Red Hat Display', Arial, sans-serif;
+}
+
+.login-form input:focus {
+    border-color: #29527a;
+}
+
+.login-form button {
+    background: #29527a;
+    color: #fff;
+    font-weight: 700;
+    font-size: 32px;
+    border: none;
+    border-radius: 40px;
+    padding: 12px 0;
+    margin-top: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s;
+    font-family: 'Red Hat Display', Arial, sans-serif;
+}
+
+.login-form button:hover {
+    background: #1d3a5a;
+}
+
+/* Home Page Layout */
+.home-container {
+    display: flex;
+    gap: 32px;
+    padding: 32px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.panel {
+    flex: 1;
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(44,62,80,0.06);
+    min-width: 300px;
+}
+
+.panel-header {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #29527a;
+}
+
+/* Todo List */
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.todo-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(44,62,80,0.08);
+}
+
+.todo-label {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.todo-date {
+    color: #666;
+    font-size: 16px;
+}
+
+.todo-checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Notifications */
+.notifications-panel {
+    background: white;
+}
+
+.notification-group {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.notification-title {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #29527a;
+}
+
+.notification-message {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.notification-checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background: #181818;
+    color: #fff;
+}
+
+body.dark-mode .panel {
+    background: #222;
+}
+
+body.dark-mode .todo-item,
+body.dark-mode .notification-group {
+    background: #2a2a2a;
+}
+
+body.dark-mode .todo-date {
+    color: #aaa;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .home-container {
+        flex-direction: column;
+        padding: 16px;
+    }
+    
+    .panel {
+        min-width: unset;
+    }
+}
+
+.signup-link {
+    margin-top: 16px;
+    color: #888;
+    font-size: 18px;
+    text-align: center;
+}
+.signup-link a {
+    color: #2342d6;
+    text-decoration: underline;
+}
+.dark-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 32px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+}
+.dark-toggle-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: none;
+    background: #ddd;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+body.dark-mode .signup-link {
+    color: #ccc;
+}
+body.dark-mode .signup-link a {
+    color: #fff;
+}
+body.dark-mode .dark-toggle-btn {
+    background: #222;
+}
+.page-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100vw;
+}
+.points-badge {
+    background: #e0e7ef;
+    color: #29527a;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 4px 12px;
+    margin: 0 10px;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.04);
+    transition: background 0.2s, color 0.2s;
+}
+.points-badge:hover {
+    background: #29527a;
+    color: #fff;
+}
+.class-summary {
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding: 12px 0;
+    cursor: pointer;
+    border-radius: 12px;
+    background: #e0e7ef;
+    color: #29527a;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.04);
+}
+.class-summary:hover {
+    background: #29527a;
+    color: #fff;
+} 

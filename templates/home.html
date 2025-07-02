@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Home - Hypotanius Homework Helper{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    <div class="panel">
+        <div class="panel-header">
+            <span>To-Do List</span>
+            <span class="points-badge">120 pts</span>
+        </div>
+        <div class="todo-list">
+            <div class="todo-item">
+                <span class="todo-label">Math Homework - Chapter 5</span>
+                <span class="todo-date">Due Mar 2, 2025</span>
+                <input type="checkbox" class="todo-checkbox" checked>
+            </div>
+            <div class="todo-item">
+                <span class="todo-label">Science Lab Report</span>
+                <span class="todo-date">Due Mar 21, 2025</span>
+                <input type="checkbox" class="todo-checkbox">
+            </div>
+            <div class="todo-item">
+                <span class="todo-label">Economics Essay</span>
+                <span class="todo-date">Due Dec 21, 2025</span>
+                <input type="checkbox" class="todo-checkbox">
+            </div>
+            <div class="todo-item">
+                <span class="todo-label">Chemistry Quiz Prep</span>
+                <span class="todo-date">Due Mar 9, 2025</span>
+                <input type="checkbox" class="todo-checkbox">
+            </div>
+        </div>
+    </div>
+    
+    <div class="panel notifications-panel">
+        <div class="panel-header">Notifications</div>
+        <div class="notification-group">
+            <div class="notification-title">Economics Class Update</div>
+            <div class="notification-message">
+                <span>Dear students, please note:<br>H1 Economics Written Assessment 1 will be held at TD23 next week. Please bring your calculators and required materials.</span>
+                <span style="display: flex; align-items: center; gap: 6px;">
+                    <span style="font-size: 0.95rem; color: #888;">Mark as read</span>
+                    <input type="checkbox" class="notification-checkbox">
+                </span>
+            </div>
+        </div>
+        <div class="notification-group">
+            <div class="notification-title">Math Assignment Reminder</div>
+            <div class="notification-message">
+                <span>The Chapter 5 homework is due this Friday. Don't forget to show all your work and include the practice problems.</span>
+                <span style="display: flex; align-items: center; gap: 6px;">
+                    <span style="font-size: 0.95rem; color: #888;">Mark as read</span>
+                    <input type="checkbox" class="notification-checkbox">
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
